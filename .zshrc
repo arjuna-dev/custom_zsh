@@ -7,7 +7,7 @@ alias c="clear"
 #git
 alias gba="git branch -a"
 
-Function ginit(){
+function ginit(){
 	git init &&
 	git add --all  &&
 	git commit -m "Initial Commit" &&
