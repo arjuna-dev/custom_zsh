@@ -87,3 +87,5 @@ function activate(){
     fi  
 
     source "${selected_dir}/activate"
+}
+
