@@ -95,3 +95,7 @@ function activate(){
     source "${selected_dir}/activate"
 }
 
+function req(){
+    pip install -r requirements.txt
+}
+
