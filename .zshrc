@@ -63,15 +63,35 @@ function env(){
 	python3 -m venv "$1" && source "$1"/bin/activate
 }
 
-# Activate an environment when being on the main script's directory
+# Activate an environment when being on the main script's directory.
 function find_bin_parent() {
-    find . -type d -name 'bin' -print | awk -F '/' '{print $(NF-1)}'
+    find . -type d -name 'bin'
 }
 function activate(){
-    local dir_name=$(find_bin_parent)
-    if [ -n "$dir_name" ]; then
-        source "$dir_name/bin/activate"
+    local -a dir_names
+    dir_names=( ${(f)"$(find_bin_parent)"} )
+
+    if [[ ${#dir_names} -gt 1 ]]; then
+        echo "Found ${#dir_names} 'bin' directories:"
+        for ((i=1; i<=${#dir_names}; i++)); do
+            echo "$i: ${dir_names[i]}"
+        done
+
+        read "?Enter the number of the environment you want to activate: " env_no
+        local selected_dir="${dir_names[$env_no]}"
+    elif [[ ${#dir_names} -eq 1 ]]; then
+        local selected_dir="${dir_names[1]}"
     else
-        echo "No directory contains bin found!"
-    fi	
+        echo "No directory containing 'bin' found!"
+        return 1
+    fi  
+
+    if [[ -f "requirements.txt" ]]; then
+        echo "Activating virtual environment and installing requirements..."
+        source "${selected_dir}/activate"
+        pip install -r requirements.txt
+    else
+        echo "Requirements.txt not found. Activating environment without installing additional requirements..."
+        source "${selected_dir}/activate"
+    fi
 }
