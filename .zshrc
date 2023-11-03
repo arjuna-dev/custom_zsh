@@ -50,3 +50,26 @@ function gz() {
 	git add . && git commit -m ""$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}" "${13}" "${14}" "${15}" "${16}" "${17}" "${18}" 
 "${19}" "${20}" "${21}" "${22}" "${23}" "${24}" "${25}" "${26}" "${27}" "${28}" "${29}" "${30}"" && git push 
 }
+
+#Git remove remote file (and commit and push)
+function  grmr(){
+	git rm -r --cached "$1" && git commit -m "Removing "$1" directory from remote repository" && git push
+}
+
+# Create and activate new python environment
+function env(){
+	python3 -m venv "$1" && source "$1"/bin/activate
+}
+
+# Activate an environment when being on the main script's directory
+function find_bin_parent() {
+    find . -type d -name 'bin' -print | awk -F '/' '{print $(NF-1)}'
+}
+function activate(){
+    local dir_name=$(find_bin_parent)
+    if [ -n "$dir_name" ]; then
+        source "$dir_name/bin/activate"
+    else
+        echo "No directory contains bin found!"
+    fi	
+}
