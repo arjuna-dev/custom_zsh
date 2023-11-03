@@ -60,13 +60,8 @@ function  grmr(){
 
 # Create and activate new python environment
 function env(){
-    echo "Creating and activating environment. Will install requirements if requirements.txt file is present."
+    echo "Creating and activating environment:"
     python3 -m venv "$1" && source "$1"/bin/activate
-        if [[ -f "requirements.txt" ]]; then
-            pip install -r requirements.txt
-        else
-            echo "No requirements.txt file found."
-        fi
 }
 
 # Activate an environment when being on the main script's directory.
