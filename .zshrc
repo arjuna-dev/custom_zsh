@@ -1,5 +1,4 @@
-export PATH="$PATH:/Users/ale.camus/DeviceTools"
-export PATH="$PATH:/Users/ale.camus/DFUTools"
+PROMPT='%F{cyan}$ '
 alias bsh="open ~/.zshrc"
 alias zsh="open ~/.zshrc"
 alias c="clear"
