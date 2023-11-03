@@ -1,6 +1,8 @@
 PROMPT='%F{cyan}$ '
-alias bsh="open ~/.zshrc"
+alias bsh="open ~/.bash_profile"
+alias bsh="open ~/.bashrc"
 alias zsh="open ~/.zshrc"
+alias zsh2="open ~/.zshenv"
 alias c="clear"
 
 #git
