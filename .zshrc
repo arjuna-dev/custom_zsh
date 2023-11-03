@@ -86,12 +86,4 @@ function activate(){
         return 1
     fi  
 
-    if [[ -f "requirements.txt" ]]; then
-        echo "Activating virtual environment and installing requirements..."
-        source "${selected_dir}/activate"
-        pip install -r requirements.txt
-    else
-        echo "Requirements.txt not found. Activating environment without installing additional requirements..."
-        source "${selected_dir}/activate"
-    fi
-}
+    source "${selected_dir}/activate"
