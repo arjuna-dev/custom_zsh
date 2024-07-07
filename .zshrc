@@ -16,8 +16,16 @@ function ginit(){
 	git push -u origin HEAD:master
 }
 
+function gupdatefork(){
+	git fetch upstream && git checkout main && git merge upstream/main && git push
+}
+
 function gchb(){
 	git checkout -b "$1"
+}
+
+function gforcepush(){
+	git push origin "$1" --force
 }
 
 function gch(){
@@ -38,13 +46,24 @@ function gdr(){
 	git push --delete origin "$1"
 }
 
+#To delete both remote and local branches
+function gdr(){
+	git push --delete origin "$1" && git branch -d "$1"
+}
+
 #To delete local branch even if not merged
 function gD(){
 	git branch -D "$1"
 }
 
+
+#To delete a branch both locally and remote one:
+function gdd(){
+	git branch -d "$1" && git push --delete origin "$1"
+}
+
 #To prune on my machine after branch deletion from other machines
-function gp(){
+function gprune(){
 	git fetch --all --prune
 }
 
@@ -61,7 +80,11 @@ function  grmr(){
 # Create and activate new python environment
 function env(){
     echo "Creating and activating environment:"
-    python3 -m venv "$1" && source "$1"/bin/activate
+    python"$1" -m venv venv && source venv/bin/activate
+}
+
+function activate(){
+    source venv/bin/activate
 }
 
 # Activate an environment when being on the main script's directory.
@@ -92,5 +115,15 @@ function activate(){
 
 function req(){
     pip install -r requirements.txt
+}
+
+
+#Flutter
+function flut-all(){
+	flutter clean && flutter pub get && flutter run -v | tee flutter_output.txt
+}
+
+function flut-run(){
+	flutter run -v | tee flutter_output.txt
 }
 
